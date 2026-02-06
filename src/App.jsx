@@ -1,28 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const App = () => {
+  // const arr = ["Chinmay", "Satyarth", "Shivam", "Rohit", "Satyarth"];
+  const [Marks, setMarks] = useState([90, 80, 70, 60, 28]);
 
-  const [num, setnum] = useState(0)
-
-  function btnClickedPlus(){
-    console.log("Button Clicked");
-    setnum(num + 1)
+  function change() {
+    if (num === arr.length - 1) {
+      setnum(0);
+    } else {
+      setnum(num + 1);
+    }
   }
-  function btnClickedMinus(){
-    console.log("Button Clicked");
-    setnum(num - 1)
-  }
-  return (
-    <div className='bg-black h-screen w-full flex flex-col justify-center items-center gap-5'>
-      <h1 className=" font-bold underline text-9xl text-center text-blue-600">
-        {num}
-      </h1>
 
-      <button onClick={btnClickedPlus} className='active:scale-95 ease-in-out duration-300 px-5 py-2 bg-emerald-500 rounded'>Increase</button>
-      <button onClick={btnClickedMinus} className='active:scale-95 ease-in-out duration-300 px-5 py-2 bg-emerald-500 rounded'>Decrease</button>
-      <div className="box w-40 h-40 bg-emerald-500 rounded-3xl"></div>
-    </div>
-  )
+function giveGrace(){
+  const newMarks = Marks.map(function(elem){
+    if (elem <33){
+      return elem + 5;
+    }
+    else return elem;
+  })
+  setMarks(newMarks);
 }
 
-export default App
+  const [num, setnum] = useState(0);
+  return (
+    <div className="bg-black h-screen w-full flex flex-col justify-center items-center gap-5">
+      {Marks.map(function (elem, index) {
+        return (
+          <h1 className="text-3xl text-white font-semibold" key={index}>
+            Student {index + 1} got {elem} marks {elem <33? "[Fail]":"[Pass]"}
+          </h1>
+        );
+      })}
+      <button
+        onClick={giveGrace}
+        className="active:scale-95 bg-emerald-300 duration-200 ease-in px-5 py-3 mt-5 rounded-2xl font-medium text-1xl"
+      >
+        Give them Grace
+      </button>
+      {/* <h1 className=" font-bold underline text-9xl text-center text-blue-600">
+        {arr[num]}
+      </h1> */}
+      {/* <button onClick={change} className='bg-amber-300 duration-200 ease-in px-5 py-3 mt-5 rounded-2xl font-medium text-1xl'>Change</button> */}
+    </div>
+  );
+};
+
+export default App;
